@@ -1,0 +1,106 @@
+using System;
+
+
+interface IGeometricShape
+{
+    double CalculateArea();
+    double CalculatePerimeter();
+}
+
+class GeometricShape : IGeometricShape
+{
+    public virtual double CalculateArea()
+    {
+        return 0;
+    }
+
+    public virtual double CalculatePerimeter()
+    {
+        return 0;
+    }
+}
+
+class Circle : GeometricShape
+{
+    private double radius;
+
+    public Circle(double radius)
+    {
+        this.radius = radius;
+    }
+
+    public override double CalculateArea()
+    {
+        return Math.PI * radius * radius;
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle : GeometricShape
+{
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width)
+    {
+        this.length = length;
+        this.width = width;
+    }
+
+    public override double CalculateArea()
+    {
+        return length * width;
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return 2 * (length + width);
+    }
+}
+
+class Triangle : GeometricShape
+{
+    private double side1;
+    private double side2;
+    private double side3;
+
+    public Triangle(double side1, double side2, double side3)
+    {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    public override double CalculateArea()
+    {
+        double s = (side1 + side2 + side3) / 2;
+        return Math.Sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    public override double CalculatePerimeter()
+    {
+        return side1 + side2 + side3;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Circle circle = new Circle(5);
+        Console.WriteLine("Площа кола: " + circle.CalculateArea());
+        Console.WriteLine("Периметр кола: " + circle.CalculatePerimeter());
+
+        Rectangle rectangle = new Rectangle(4, 6);
+        Console.WriteLine("Площа прямокутника: " + rectangle.CalculateArea());
+        Console.WriteLine("Периметр прямокутника: " + rectangle.CalculatePerimeter());
+
+        Triangle triangle = new Triangle(3, 4, 5);
+        Console.WriteLine("Площа трикутника: " + triangle.CalculateArea());
+        Console.WriteLine("Периметр трикутника: " + triangle.CalculatePerimeter());
+    }
+}
